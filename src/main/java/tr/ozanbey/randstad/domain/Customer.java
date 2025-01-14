@@ -69,4 +69,5 @@ public class Customer implements Serializable {
     public void setUsedCreditLimit(BigDecimal usedCreditLimit) {
         this.usedCreditLimit = usedCreditLimit;
     }
+
 }

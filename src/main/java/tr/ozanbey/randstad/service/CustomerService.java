@@ -36,5 +36,4 @@ public class CustomerService {
         customer.setUsedCreditLimit(customer.getUsedCreditLimit().subtract(loanAmount));
         customerRepository.save(customer);
     }
-
 }

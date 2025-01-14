@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tr.ozanbey.randstad.domain.Loan;
+import tr.ozanbey.randstad.repository.LoanCriteria;
 import tr.ozanbey.randstad.repository.LoanRepository;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,10 @@ public class LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
+    @Autowired
+    private LoanCriteria loanCriteria;
+
+
     public Loan createLoan(Loan loan) {
         loan.setCreateDate(LocalDateTime.now());
         loan = loanRepository.save(loan);
@@ -31,8 +36,9 @@ public class LoanService {
         return loan;
     }
 
-    public List<Loan> getAllLoans(Long customerId) {
-        return loanRepository.findAllByCustomerId(customerId);
+    public List<Loan> getAllLoans(Long customerId, String numberOfInstallments, String isPaid) {
+        return loanCriteria.findByFilter(customerId, numberOfInstallments, isPaid);
+        //return loanRepository.findAllByCustomerId(customerId);
     }
 
     public Loan closeLoan(Long loanId) {
